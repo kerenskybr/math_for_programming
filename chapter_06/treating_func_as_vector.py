@@ -19,3 +19,9 @@ def g(x):
     return sin(x)
 plot([f,g],-10,10)
 
+def add_functions(f,g):
+    def new_function(x):
+        return f(x) + g(x)
+    return new_function
+
+

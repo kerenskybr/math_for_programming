@@ -158,5 +158,29 @@ class CoordinateVector(Vector):
         return "{}{}".format(self.__class__.__qualname__, self.coordinates)
     
 
+class Matrix5_by_3(Vector):
+    rows = 5
+    columns = 3
+    def __init__(self, matrix):
+        self.matrix = matrix
+    
+    def add(self, other):
+        return Matrix5_by_3(tuple(
+            tuple(a + b for a, b in zip(row1, row2))
+            for (row1, row2) in zip(self.matrix, other.matrix)
+        ))
+    def scale(self, scalar):
+        return Matrix5_by_3(tuple(
+            tuple(scalar * x for x in row)
+            for row in self.matrix
+        ))
+    @classmethod
+    def zero(cls):
+        return Matrix5_by_3(tuple( #2
+        tuple(0 for j in range(0, cls.columns))
+        for i in range(0, cls.rows)
+        ))
+
+
 def average(v1,v2):
     return 0.5 * v1 + 0.5 * v2
