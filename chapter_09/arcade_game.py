@@ -124,7 +124,7 @@ def main():
 
     # p key prints screenshot (you can ignore this variable)
     p_pressed = False
-
+    acceleration = 3
     while not done:
 
         clock.tick()
@@ -147,6 +147,14 @@ def main():
         if keys[pygame.K_RIGHT]:
             ship.rotation_angle -= milliseconds * (2*pi / 1000)
 
+        if keys[pygame.K_UP]: 
+            ax = acceleration * cos(ship.rotation_angle)
+            ay = acceleration * sin(ship.rotation_angle)
+            ship.vx += ax * milliseconds/1000
+            ship.vy += ay * milliseconds/1000
+        
+        ship.move(milliseconds)
+       
         laser = ship.laser_segment()
 
         # p key saves screenshot (you can ignore this)
